@@ -3,6 +3,7 @@ import logging
 import socket
 import sys
 from datetime import datetime
+
 try:
     import json
 except ImportError:
@@ -82,7 +83,8 @@ class LogstashFormatterBase(logging.Formatter):
         if sys.version_info < (3, 0):
             return json.dumps(message)
         else:
-            return bytes(json.dumps(message), 'utf-8')
+            return str(json.dumps(message))
+
 
 class LogstashFormatterVersion0(LogstashFormatterBase):
     version = 0
